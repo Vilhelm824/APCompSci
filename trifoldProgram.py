@@ -55,6 +55,6 @@ draw_rect(180, 105, 0, 0)
 draw_parallelogram(180, 50, -90, -85, 20)
 depth_lol()
 draw_keys()
+
 wn = turtle.Screen()
 wn.mainloop()
-
