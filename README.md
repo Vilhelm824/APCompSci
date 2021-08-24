@@ -1,3 +1,4 @@
 # APCompSci
-stuff from my pltw ap compsci course, should all be python scripts
+Scripts from my pltw ap compsci course
+All python scripts
 
