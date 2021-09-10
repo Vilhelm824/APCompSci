@@ -37,20 +37,27 @@ for s in turtle_shapes:
 
 speed = 1
 steps = 0
-while steps < 50:
+while steps < 30:
     for i in range(len(horiz_turtles)): 
         horiz_turtles[i].speed(speed)
         vert_turtles[i].speed(speed)
         x_distance = abs(horiz_turtles[i].xcor() - vert_turtles[i].xcor())
         y_distance = abs(horiz_turtles[i].ycor() - vert_turtles[i].ycor())
-        if(x_distance > 20 and y_distance > 20):
-            horiz_turtles[i].fd(8)
-            vert_turtles[i].fd(8)
-        speed = int(5 * math.sin(steps/8) + 5)
-        print(speed)
+        if x_distance > 20 and y_distance > 20:
+            horiz_turtles[i].fd(10)
+            vert_turtles[i].fd(10)
+        else:
+            # if collided, turn pink
+            horiz_turtles[i].color("pink")
+            vert_turtles[i].color("pink")
+        # sin function changes speed
+        speed = int(4.5 * math.sin(steps/4) + 4.5)
         
     steps = steps + 1
 
+for i in range(len(horiz_turtles)):
+    horiz_turtles[i].color("sky blue")
+    vert_turtles[i].color("sky blue")
 
 
 wn = trtl.Screen()
