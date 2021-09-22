@@ -5,15 +5,16 @@ import time
 
 pendulum = turtle.Turtle()
 pendulum.speed(0)
+pendulum.pensize(2)
 turtle.colormode(255)
 # parameter values for the pendulum
 # parameters for x axis
-freqX = 10
+freqX = 3
 ampX = 200
 phaseX = math.pi/2 * 0
 dampX = 0.01
 # parameters for y axis
-freqY = 5
+freqY = 7
 ampY = 200
 phaseY = 0
 dampY = 0.01
@@ -30,8 +31,9 @@ for i in range(5000):
     pendulum.pd()
 
     blueChannel = int((0.5*math.sin(timeElapsed*freqX + phaseX) + 0.5) * 255)
-    greenChannel = int((0.5*math.sin(timeElapsed*freqY + phaseY) + 0.5) * 255)
+    # can include if want to change between 4 colors instead of 2
+    # greenChannel = int((0.5*math.sin(timeElapsed*freqY + phaseY) + 0.5) * 255)
+    pendulum.color(0, 180, blueChannel)
 
-    pendulum.color(0, greenChannel, blueChannel)
 
 turtle.mainloop()
