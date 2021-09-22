@@ -14,19 +14,22 @@ frequencies = [1, 2, 3, 4, 5, 6, 7/2, 9/2, 15/4]
 # parameters for x axis
 # random frequency from list
 freqX = frequencies[random.randrange(len(frequencies))]
-ampX = 200
+ampX = 250
 # random pahse shift, multiple of pi/2
 phaseX = math.pi/2 * random.randrange(4)
-dampX = 0.02
+dampX = 0.01
 # parameters for y axis
 # random frequency from list
 freqY = frequencies[random.randrange(len(frequencies))]
-ampY = 200
+ampY = 250
 phaseY = 0
-dampY = 0.02
+dampY = 0.01
 
-# debug random stuff
-print(freqX, freqY, phaseX)
+# print the parameters
+print("x frequency: " + str(freqX))
+print("y frequency: " + str(freqY))
+print("phase shift: " + str(phaseX))
+
 # initial time
 startTime = time.time()
 pendulum.pu()
@@ -42,10 +45,10 @@ for i in range(5000):
     blueChannel = int((0.5*math.sin(timeElapsed*freqX + phaseX) + 0.5) * 255)
     # can include if want to change between 4 colors instead of 2
     # greenChannel = int((0.5*math.sin(timeElapsed*freqY + phaseY) + 0.5) * 255)
+    pendulum.color(0, 180, blueChannel)
     # change pen size in time with the pendulum
     penSize = (2*math.sin(timeElapsed*freqY*2 + phaseY - math.pi/2) + 3)
     pendulum.pensize(penSize)
-    pendulum.color(0, 180, blueChannel)
 
 
 turtle.mainloop()
