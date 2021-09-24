@@ -1,12 +1,10 @@
 #!/usr/bin/python3
 import turtle
 import math
-import time
 import random
-from typing import Iterable
 
 # get user input
-iterations = int(input("how many iterations would you like to run: "))
+iterations = int(input("how many iterations would you like to run (should be above 1000): "))
 size = input("do you want the line size to vary [y/n]")
 if(size == "n"):
     sizeYN = 0
@@ -45,12 +43,10 @@ print("y frequency: " + str(freqY))
 print("phase shift: " + str(phaseX))
 print("iterations: " + str(iterations))
 
-# initial time
-startTime = time.time()
 pendulum.pu()
 for i in range(iterations):
-    # running clock 
-    timeElapsed = time.time() - startTime
+    # change the denominator for different render detail, comes at cost of time
+    timeElapsed = i/35
     # sine fuctions with damping to emulate pendulum
     xPos = ampX*math.sin(timeElapsed*freqX + phaseX)*math.exp(-dampX*timeElapsed) 
     yPos = ampY*math.sin(timeElapsed*freqY + phaseY)*math.exp(-dampY*timeElapsed) 
