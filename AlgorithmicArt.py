@@ -3,7 +3,22 @@ import turtle
 import math
 import time
 import random
+from typing import Iterable
 
+# get user input
+iterations = int(input("how many iterations would you like to run: "))
+size = input("do you want the line size to vary [y/n]")
+if(size == "n"):
+    sizeYN = 0
+else:
+    sizeYN = 1
+color = input("do you want color to vary [y/n]")
+if(color == "n"):
+    colorYN = 0
+else:
+    colorYN = 1
+
+# initialize turtle
 pendulum = turtle.Turtle()
 pendulum.speed(0)
 pendulum.pensize(0)
@@ -23,17 +38,17 @@ dampX = 0.01
 freqY = frequencies[random.randrange(len(frequencies))]
 ampY = 250
 phaseY = 0
-dampY = 0.01
-
+dampY = 0.0
 # print the parameters
 print("x frequency: " + str(freqX))
 print("y frequency: " + str(freqY))
 print("phase shift: " + str(phaseX))
+print("iterations: " + str(iterations))
 
 # initial time
 startTime = time.time()
 pendulum.pu()
-for i in range(5000):
+for i in range(iterations):
     # running clock 
     timeElapsed = time.time() - startTime
     # sine fuctions with damping to emulate pendulum
@@ -45,10 +60,10 @@ for i in range(5000):
     blueChannel = int((0.5*math.sin(timeElapsed*freqX + phaseX) + 0.5) * 255)
     # can include if want to change between 4 colors instead of 2
     # greenChannel = int((0.5*math.sin(timeElapsed*freqY + phaseY) + 0.5) * 255)
-    pendulum.color(0, 180, blueChannel)
+    pendulum.color(0, 180, blueChannel * colorYN)
     # change pen size in time with the pendulum
     penSize = (2*math.sin(timeElapsed*freqY*2 + phaseY - math.pi/2) + 3)
-    pendulum.pensize(penSize)
+    pendulum.pensize(penSize * sizeYN)
 
 
 turtle.mainloop()
