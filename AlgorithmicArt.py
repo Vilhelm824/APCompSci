@@ -3,8 +3,20 @@ import turtle
 import math
 import random
 
+
+# print banner
+print(r"""
+╔------------------------------------╗
+█    ___   __          ___       __  █
+█   / _ | / /__ ____  / _ | ____/ /_ █
+█  / __ |/ / _ `/ _ \/ __ |/ __/ __/ █
+█ /_/ |_/_/\_, /\___/_/ |_/_/  \__/  █
+█        /___/                       █
+╚------------------------------------╝
+""")
+
 # get user input
-iterations = int(input("how many iterations would you like to run (should be above 1000): "))
+iterations = int(input("\nhow many iterations would you like to run (should be above 1000): "))
 size = input("do you want the line size to vary [y/n]")
 if(size == "n"):
     sizeYN = 0
