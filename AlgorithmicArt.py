@@ -3,7 +3,7 @@ import turtle
 import math
 import random
 
-# get user input
+# get user input and change modify options 
 iterations = int(input("how many iterations would you like to run (should be above 1000): "))
 size = input("do you want the line size to vary [y/n]")
 if(size == "n"):
@@ -44,17 +44,18 @@ print("phase shift: " + str(phaseX))
 print("iterations: " + str(iterations))
 
 pendulum.pu()
+# draw the harmonograph for selected number of iterations
 for i in range(iterations):
     # change the denominator for different render detail, comes at cost of time
     timeElapsed = i/35
-    # sine fuctions with damping to emulate pendulum
+    # sine fuctions with damping to simulate a real pendulum
     xPos = ampX*math.sin(timeElapsed*freqX + phaseX)*math.exp(-dampX*timeElapsed) 
     yPos = ampY*math.sin(timeElapsed*freqY + phaseY)*math.exp(-dampY*timeElapsed) 
     pendulum.goto(xPos, yPos)
     pendulum.pd()
-    # sin function that changes color in time with whatever frequencies are used
+    # sine function that changes color in time with whatever frequencies are used
     blueChannel = int((0.5*math.sin(timeElapsed*freqX + phaseX) + 0.5) * 255)
-    # can include if want to change between 4 colors instead of 2
+    # can include following line if want to change between 4 colors instead of 2
     # greenChannel = int((0.5*math.sin(timeElapsed*freqY + phaseY) + 0.5) * 255)
     pendulum.color(0, 180, blueChannel * colorYN)
     # change pen size in time with the pendulum
