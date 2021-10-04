@@ -1,6 +1,7 @@
 #-----import statements-----
 import turtle
 from random import choice, randrange
+import leaderboard as lb
 
 #-----game configuration----
 screen = turtle.Screen()
@@ -9,10 +10,14 @@ turtleShape = "turtle"
 turtleSize = 2
 playerScore = 0
 fontSetup = ("Arial", 20, "normal")
-timer = 20
+timer = 5
 counter_interval = 1000   #1000 represents 1 second
 timer_up = False
 colors = ["olive drab", "light pink", "dark orchid", "sienna", "chartreuse", "coral", "light green", "khaki"]
+leaderboard_file_name = "leaderboardData.txt"
+leader_names_list = []
+leader_scores_list = []
+player_name = input("Enter your name: ")
 #-----initialize turtle-----
 jeffery = turtle.Turtle()
 ScoreKeeper = turtle.Turtle()
@@ -50,10 +55,10 @@ def JeffWasClicked(x, y):
         ChangePosition()
         UpdateScore()
         StampColor()
-        screen.bgcolor("medium spring green")
+        screen.bgcolor("pink")
     else:
         jeffery.ht()
-        screen.bgcolor("magenta")
+        screen.bgcolor("red")
 
 
 
@@ -63,6 +68,7 @@ def Countdown():
   if timer <= 0:
     TimeKeeper.write("Time's Up", font=fontSetup)
     timer_up = True
+    manage_leaderboard()
   else:
     TimeKeeper.write("Timer: " + str(timer), font=fontSetup)
     timer -= 1
@@ -74,6 +80,26 @@ def StampColor():
     jeffery.color(choice(colors))
     jeffery.stamp()
     jeffery.color(turtleColor)
+
+
+# manages the leaderboard for top 5 scorers
+def manage_leaderboard():
+  global leaderboard_file_name
+  global leader_scores_list
+  global leader_names_list
+  global playerScore
+  global jeffery
+
+  # load all the leaderboard records into the lists
+  lb.load_leaderboard(leaderboard_file_name, leader_names_list, leader_scores_list)
+
+  # TODO
+  if (len(leader_scores_list) < 5 or playerScore > leader_scores_list[4]):
+    lb.update_leaderboard(leaderboard_file_name, leader_names_list, leader_scores_list, player_name, playerScore)
+    lb.draw_leaderboard(leader_names_list, leader_scores_list, True, jeffery, playerScore)
+
+  else:
+    lb.draw_leaderboard(leader_names_list, leader_scores_list, False, jeffery, playerScore)
 
 #-----events----------------
 jeffery.onclick(JeffWasClicked)
