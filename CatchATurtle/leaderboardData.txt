@@ -1,5 +1,5 @@
-will,1
-gino,2
-jack,3
-bruv,4
 exe,101
+wigga,30
+wigga2.0,27
+bruv,25
+wigga2.0,21
