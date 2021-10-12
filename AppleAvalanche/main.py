@@ -27,8 +27,8 @@ def draw_apple(active_apple):
 
 def Newton(active_apple):
   active_apple.pu()
-  active_apple.sety(-150)
   active_apple.clear()
+  active_apple.sety(-150)
 
 
 def DumbUser(active_apple, key):
@@ -57,7 +57,7 @@ for apple in turtle_list:
 
 for i in range(9):
   wn.onkeypress(functools.partial(Newton, turtle_list[i]), key_list[i])
-  
+
 
 wn.listen()
 wn.mainloop()
