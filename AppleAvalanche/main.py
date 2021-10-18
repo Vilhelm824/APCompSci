@@ -30,7 +30,7 @@ def Newton(active_apple):
   active_apple.clear()
   active_apple.sety(-150)
 
-
+# so dumb people know what keys to press
 def DumbUser(active_apple, key):
   active_apple.color("white")
   wn.tracer(False)
