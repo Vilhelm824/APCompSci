@@ -1,5 +1,5 @@
 exe,101
-wigga,30
-wigga2.0,27
+good,30
+mediocre,27
+will,26
 bruv,25
-wigga2.0,21
