@@ -6,7 +6,7 @@ def test_my_button():
     global password
     frame_auth.tkraise()
     password = ent_password.get()
-    lbl_show_pwd.config(text=password)
+    lbl_show_pwd.config(text="password: " + str(password))
 
 
 # main window
@@ -27,7 +27,7 @@ ent_password.pack(pady=5)
 btn_login = tk.Button(frame_login, text='Login', command=test_my_button)
 btn_login.pack()
 
-# create authorization fram
+# create authorization frame
 frame_auth = tk.Frame(root)
 frame_auth.grid()
 frame_auth.grid(row=0, column=0, sticky='news')
