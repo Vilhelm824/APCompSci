@@ -1,5 +1,6 @@
 import tkinter as tk
- 
+import tkinter.scrolledtext as tksc
+
  
 def test_my_button():
     frame_auth.tkraise()
@@ -33,4 +34,6 @@ frame_auth.grid(row=0, column=0, sticky='news')
  
 frame_login.tkraise()
  
+test_textbox = tksc.ScrolledText(frame_auth)
+test_textbox.configure(height=10, width=50, bg='red', font='Courier')
 root.mainloop()
