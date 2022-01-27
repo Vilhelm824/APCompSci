@@ -9,7 +9,7 @@ root = tk.Tk()
 frame = tk.Frame(root)
 frame.grid()
 # adds an output box to GUI.
-command_textbox = tksc.ScrolledText(frame, height=10, width=100)
+command_textbox = tksc.ScrolledText(frame, height=20, width=65)
 
 # run process 
 def do_command(command):
@@ -46,26 +46,26 @@ def mSave():
   
 
 # set up buttons
-ping_btn = tk.Button(frame, text="Ping Server", activebackground="cyan", bg="blue", bd=5, command=lambda:do_command("ping")).grid(column=0, row=0)
-tracert_btn = tk.Button(frame, text="Trace Ping", activebackground="cyan", bg="blue", bd=5, command=lambda:do_command("traceroute")).grid(column=1, row=0)
-nslookup_btn = tk.Button(frame, text="DNS Lookup", activebackground="cyan", bg="blue", bd=5, command=lambda:do_command("nslookup")).grid(column=2, row=0)
-save_btn = tk.Button(frame, text="Save Output", activebackground="cyan", bg="blue", bd=5, command=mSave).grid(column=3, row=0)
+ping_btn = tk.Button(frame, text="Ping Server", activebackground="cyan", bg="blue", bd=5, width=8, font=("comic sans", 14), command=lambda:do_command("ping"))
+tracert_btn = tk.Button(frame, text="Trace Ping", activebackground="cyan", bg="blue", bd=5, width=8, font=("comic sans", 14), command=lambda:do_command("traceroute"))
+nslookup_btn = tk.Button(frame, text="DNS Lookup", activebackground="cyan", bg="blue", bd=5, width=8, font=("comic sans", 14), command=lambda:do_command("nslookup"))
+save_btn = tk.Button(frame, text="Save Output", activebackground="cyan", bg="blue", bd=5, width=8, font=("comic sans", 14), command=mSave)
 
 # creates the frame with label for the text box
-frame_URL = tk.Frame(root, pady=10,  bg="black").grid(column=0, row=1) # change frame color
+# frame_URL = tk.Frame(root, pady=10, bg="black") # change frame color
 
 # decorative label
-url_label = tk.Label(frame_URL, text="Enter a URL of interest: ", compound="center", font=("comic sans", 14), bd=0, relief=tk.FLAT, cursor="heart", fg="mediumpurple3", bg="black").grid(column=0, columnspan=2, row = 1)
-url_entry= tk.Entry(frame_URL,  font=("comic sans", 14)).grid(column=1, columnspan=2, row=1) # change font
+url_label = tk.Label(frame, text="Enter a URL: ", compound="left", font=("comic sans", 14), bd=0, relief=tk.FLAT, cursor="heart", fg="cyan", bg="grey")
+url_entry= tk.Entry(frame,  font=("comic sans", 14), width=22) # change font
 
-frame = tk.Frame(root,  bg="black") # change frame color
-''' # pack everything
-nslookup_btn.pack()
-ping_btn.pack()
-tracert_btn.pack()
-save_btn.pack()
-frame_URL.pack()
-command_textbox.pack()'''
+# arrange everything
+nslookup_btn.grid(column=0,row=0)
+ping_btn.grid(column=1, row=0)
+tracert_btn.grid(column=2, row=0)
+save_btn.grid(column=3, row=0)
+url_label.grid(column=0, row=1)
+url_entry.grid(column=1, row=1, columnspan=2)
+command_textbox.grid(column=0, row=2, columnspan=4)
 
 
 root.mainloop()
