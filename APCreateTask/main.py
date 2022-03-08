@@ -5,6 +5,8 @@ import requests
 import ipaddress
 
 
+#----Function Definitions----
+
 # use api to get infromation about the IP address and parse it into a dictionary
 def GetInfo(ipAddress):
     # HTTP request ap-api.com for info on the IP and return data(selected with fields option) as JSON
@@ -47,7 +49,7 @@ while(True):
     if(ValidateIP(query) or query == ""):
         break
     print("invalid IP, try again")
-    
+
 # get info from the api database
 parsedInfo = GetInfo(query)
 
