@@ -1,4 +1,5 @@
 # Goal: CLI that displays info about an IP adress, sourced from an online API and parsed from JSON format
+from ast import parse
 import webbrowser
 import requests
 import ipaddress
@@ -28,20 +29,43 @@ def OpenMap(addressInfo):
     webbrowser.open(f"https://www.google.com/maps/place/{latitude},{longitude}")
 
 
-# TODO: error messages and incorrect input
+# checks if the input is a valid ip address and returns a boolean accordingly
 def ValidateIP(ipToCheck):
     try:
         ipaddress.ip_address(ipToCheck)
     except:
-        print("invalid ip")
+        return False
+    else:
+        return True
 
-# IP address to check
-query = input("Enter IP Address (leave blank for localhost): ")
 
-ValidateIP(query)
+#----Main Code Execution----
 
-# main code execution
+# ask for IP address to check and make sure it's valid
+while(True):
+    query = input("Enter IP Address (leave blank for localhost): ")
+    if(ValidateIP(query) or query == ""):
+        break
+    print("invalid IP, try again")
+
 parsedInfo = GetInfo(query)
-# print(parsedInfo)
+
+# print error message and exit the program if there's an api problem
+if(parsedInfo['status'] == 'fail'):
+    errorMessage = parsedInfo['message']
+    print(f"There was a problem with the api ({errorMessage}), exiting program...")
+    exit()
+
 PrintOutput(parsedInfo)
-# OpenMap(parsedInfo)
+
+# ask whether or not to open a map of the location, must enter 'y' or 'n'
+while(True):
+    mapYN = input("Open map (y/n) ")
+    if(mapYN == 'y' or mapYN == 'Y'):
+        OpenMap(parsedInfo)
+        break
+    elif(mapYN == 'n' or mapYN == 'N'):
+        break
+
+print("Exiting program...")
+exit()
