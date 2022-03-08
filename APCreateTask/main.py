@@ -47,18 +47,20 @@ while(True):
     if(ValidateIP(query) or query == ""):
         break
     print("invalid IP, try again")
-
+    
+# get info from the api database
 parsedInfo = GetInfo(query)
 
-# print error message and exit the program if there's an api problem
+# print error message and exit the program if there's an api error
 if(parsedInfo['status'] == 'fail'):
     errorMessage = parsedInfo['message']
     print(f"There was a problem with the api ({errorMessage}), exiting program...")
     exit()
 
+# show output
 PrintOutput(parsedInfo)
 
-# ask whether or not to open a map of the location, must enter 'y' or 'n'
+# choose whether or not to open a map of the location, must enter 'y' or 'n'
 while(True):
     mapYN = input("Open map (y/n) ")
     if(mapYN == 'y' or mapYN == 'Y'):
