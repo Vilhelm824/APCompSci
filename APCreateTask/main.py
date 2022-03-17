@@ -1,4 +1,5 @@
 # Goal: CLI that displays info about an IP adress, sourced from an online API and parsed from JSON format
+from tkinter import FALSE
 import webbrowser
 import requests
 import ipaddress
@@ -21,10 +22,14 @@ def PrintOutput(addressInfo):
     print("Organization:", addressInfo['org'],"\n")
 
 # open web browser with location on maps
-def OpenMap(addressInfo):
+def OpenMap(addressInfo, openYN):
     latitude = addressInfo['lat']
     longitude = addressInfo['lon']
-    webbrowser.open(f"https://www.google.com/maps/place/{latitude},{longitude}")
+    if(openYN):
+        print("opening map...")
+        webbrowser.open(f"https://www.google.com/maps/place/{latitude},{longitude}")
+    else:
+        print("you chose not to open map")
 
 # checks if the input is a valid ip address and returns a boolean accordingly
 def ValidateIP(ipToCheck):
@@ -36,30 +41,36 @@ def ValidateIP(ipToCheck):
         return True
 
 # get ip address of interest and whether or not to open map, and return the answers
-def GetUserInput():
+def GetUserInput(whichInput):
+    openMap = None
+    query = None
     # ask for IP address to check and make sure it's valid
-    while(True):
-        query = input("Enter IP Address (leave blank for localhost): ")
-        if(ValidateIP(query) or query == ""):
-            break
-        print("invalid IP, try again")
+    if(whichInput == "ip"):
+        while(True):
+            query = input("Enter IP Address (leave blank for localhost): ")
+            if(ValidateIP(query) or query == ""):
+                break
+            print("invalid IP, try again")
+        return query
     # choose whether or not to open a map of the location, must enter 'y' or 'n'
-    while(True):
-        mapYN = input("Would you like to open a map of the IP address location? (y/n) ")
-        if(mapYN == 'y' or mapYN == 'Y'):
-            openMap = True
-            break
-        elif(mapYN == 'n' or mapYN == 'N'):
-            break
-    return query, openMap
+    elif(whichInput == "map"):
+        while(True):
+            mapYN = input("Would you like to open a map of the IP address location? (y/n) ")
+            if(mapYN == 'y' or mapYN == 'Y'):
+                openMap = True
+                break
+            elif(mapYN == 'n' or mapYN == 'N'):
+                openMap = False
+                break
+        return openMap
 
 
 #----Main Code Execution----#
-# store the user input in a list
-userInput = GetUserInput()
-
+# prompt for IP address of interest
+ipAddress = GetUserInput("ip")
+print(ipAddress)
 # get info from the api database
-parsedInfo = GetInfo(userInput[0])
+parsedInfo = GetInfo(ipAddress)
 
 # print error message and exit the program if there's an api error
 if(parsedInfo['status'] == 'fail'):
@@ -70,9 +81,10 @@ if(parsedInfo['status'] == 'fail'):
 # show output
 PrintOutput(parsedInfo)
 
+# prompt whether or not to open the map
+openMap = GetUserInput("map")
 # open map if user chose to do so
-if(userInput[1]):
-    OpenMap(parsedInfo)
+OpenMap(parsedInfo, openMap)
 
 print("Exiting program...")
 exit()
