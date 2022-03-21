@@ -8,7 +8,8 @@ import ipaddress
 #----Function Definitions----#
 # use api to get infromation about the IP address and parse it into a dictionary
 def GetInfo(ipAddress):
-    # HTTP request ap-api.com for info on the IP and return data(selected with fields option) as JSON
+    # HTTP request to ip-api.com for info on the IP and return data(selected with fields option) as JSON
+    # credit to ip-api.com for the ip adress geolocation database
     # uses f-strings to add the query into the string
     ipInfo = requests.get(f"http://ip-api.com/json/{ipAddress}?fields=status,message,country,regionName,city,lat,lon,org,query")
     # convert the JSON data from the request into a python dictionary
