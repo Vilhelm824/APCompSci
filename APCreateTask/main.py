@@ -1,5 +1,4 @@
 # Goal: CLI that displays info about an IP adress, sourced from an online API and parsed from JSON format
-from tkinter import FALSE
 import webbrowser
 import requests
 import ipaddress
