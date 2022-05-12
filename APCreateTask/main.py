@@ -1,12 +1,12 @@
-# Goal: CLI that displays info about an IP adress, sourced from an online API and parsed from JSON format
-from tkinter import FALSE
+#! /usr/bin/python3
+# Goal: CLI that displays info about an IP address, sourced from an online API and parsed from JSON format
 import webbrowser
 import requests
 import ipaddress
 
 
 #----Function Definitions----#
-# use api to get infromation about the IP address and parse it into a dictionary
+# use api to get information about the IP address and parse it into a dictionary
 def GetInfo(ipAddress):
     # HTTP request to ip-api.com for info on the IP and return data(selected with fields option) as JSON
     # credit to ip-api.com for the ip adress geolocation database
@@ -17,7 +17,7 @@ def GetInfo(ipAddress):
 
 # print out data nicely
 def PrintOutput(addressInfo):
-    print("========================= \n||IP Adress Information|| \n=========================")
+    print("========================= \n||IP Address Information|| \n=========================")
     print("Country:", addressInfo['country'], "\nRegion/State:", addressInfo['regionName'], "\nCity:", addressInfo['city'])
     print("Coordinates:", str(addressInfo['lat']) + ",", str(addressInfo['lon']))
     print("Organization:", addressInfo['org'],"\n")
